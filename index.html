@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Image Mask Creator</title>
+<script async src="script.js" type="text/javascript">
+</script>
+<script async src="https://docs.opencv.org/4.5.0/opencv.js" type="text/javascript"></script>
+
+<style>
+	input {
+		width: 50px;
+	}
+</style>
+</head>
+<body style = "background-color: rgb(224, 224, 224); display: flex; justify-content: center;">
+	<div>
+		<h2>Image Mask Creator</h2>
+		<p>
+			Generate button is at the button of the page. If quantity is more than 10, it could take a few seconds to generate. <br/>
+			The Position Distribution Characterstics will take some playing around with (notes below).
+			<br/>
+			<ul>
+				<li><strong>min and max:</strong> percentage (0 to 1) of screen to place image</li>
+				<li><strong>mean:</strong> VERY IMPORTANT - the average percentage of the screen where most images will be placed (0.5 is the center) </li>
+				<li><strong>standard deviation:</strong> VERY IMPORTANT - basically how spread out generation is from mean. <br/>
+				====> 0.1 is towards center <br/>
+				====> 1 is basically completely random </li>
+				<li><strong>skew:</strong> not as important, but makes generation skew to a direction</li>
+			</ul>
+		</p>
+		<div>
+			<br/>
+			Output Image Width: <input type="number" id="canvasWidth" size="3" value="800" />
+			Output Image Height: <input type="number" id="canvasHeight" size="3" value="400" />
+			<br/>
+			Quantity: <input type="number" id="quantity" size="3" value="10" min="0"/>
+			<br/>
+			Rotation (Degrees) 
+			min: <input type="number" id="rotationMin" size="3" value="0" />
+			max: <input type="number" id="rotationMax" size="3" value="180" />
+			<br/>
+			Scale (1 is default)
+			min: <input type="number" id="scaleMin" size="3" value="0.5" step="0.01" min="0.01"/>
+			max: <input type="number" id="scaleMax" size="3" value="1" step="0.01"/>
+			
+		</div>
+		<div>
+			<h2>Position Distribution Characteristics</h2>
+			X Distribution: 
+			min: <input type="number" id="minDistX" size="3" value="0" step="0.01" min="0" max="1"/>
+			max: <input type="number" id="maxDistX" size="3" value="1" step="0.01" min="0" max="1"/>
+			mean: <input type="number" id="meanX" size="3" value="0.5" step="0.01" min="0" max="1"/>
+			std deviation: <input type="number" id="standardDeviationX" size="3" value="0.1" step="0.01"/>
+			skew: <input type="number" id="skewX" size="3" value="1" step="0.01"/>
+			<br/>
+			Y Distribution: 
+			min: <input type="number" id="minDistY" size="3" value="0" step="0.01" min="0" max="1"/>
+			max: <input type="number" id="maxDistY" size="3" value="1" step="0.01" min="0" max="1"/>
+			mean: <input type="number" id="meanY" size="3" value="0.5" step="0.01" min="0" max="1"/>
+			std deviation: <input type="number" id="standardDeviationY" size="3" value="0.1" step="0.01"/>
+			skew: <input type="number" id="skewY" size="3" value="1" step="0.01"/>
+		</div>
+
+		<br/>
+		<input type="file" style="width:auto;" id="fileInput" name="file" />
+		<img id="imageSrc" alt="No Image" width="200"/>
+		<br/>
+		<canvas style="border-style: solid;" id="canvasOutput" width = "800" height="400"></canvas>
+		<br/>
+		<button id="generateButton">Generate</button>
+	</div>
+</body>
+</html>
